@@ -1,0 +1,7 @@
+By accepting the terms and conditions, you give Viggo+ full consent and permission to:
+ * Perform one or multiple persistent XSS injections into your Viggo client.
+ * Modify and extract all the data accessible using JavaScript, CSS, and HTML on the Viggo website.
+ * Update and modify the Viggo+ code without notifying you.
+
+You take full legal responsibility for any potential lawsuits that may occur due to the XSS attack.
+You accept and agree that in the case of errors in the Viggo+ code, the developer is not responsible for any damages caused
