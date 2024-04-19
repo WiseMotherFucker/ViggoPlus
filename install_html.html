@@ -22,9 +22,13 @@
   h1 {
     font-size: 2.5rem;
   }
-  .checkbox-label {
-    display: block;
+  .checkbox-container {
     margin: 20px 0;
+    display: inline-block;
+  }
+  .checkbox-label {
+    display: inline-block;
+    margin-left: 10px;
   }
   .install-button {
     background-color: #1692bb;
@@ -45,8 +49,11 @@
 <body>
   <div class="container">
     <h1>Install Viggo+</h1>
-    <input type="checkbox" id="terms-checkbox">
-    <label for="terms-checkbox" class="checkbox-label">I accept the <a href="https://raw.githubusercontent.com/WiseMotherFucker/ViggoPlus/main/Legal/Terms%20and%20Conditions" target="_blank>terms and conditions</a></label>
+    <div class="checkbox-container">
+      <input type="checkbox" id="terms-checkbox">
+      <label for="terms-checkbox" class="checkbox-label">I accept the <a href="https://raw.githubusercontent.com/WiseMotherFucker/ViggoPlus/main/Legal/Terms%20and%20Conditions" target="_blank">terms and conditions</a></label>
+    </div>
+    <br>
     <button id="install-button" class="install-button" disabled>Install</button>
   </div>
 
