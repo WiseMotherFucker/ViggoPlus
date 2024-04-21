@@ -2,6 +2,17 @@ By accepting the terms and conditions, you give Viggo+ full consent and permissi
  * Perform one or multiple persistent XSS injections into your Viggo client.
  * Modify and extract all the data accessible using JavaScript, CSS, and HTML on the Viggo website.
  * Update and modify the Viggo+ code without notifying you.
+ * Collect data about you as a user, see more under the data section.
 
 You take full legal responsibility for any potential lawsuits that may occur due to the XSS attack.
 You accept and agree that in the case of errors in the Viggo+ code, the developer is not responsible for any damages caused
+
+
+Data:
+Viggo+ doesn't collect any unnecessary data, we collect your:
+ * Full name
+ * Email address
+ * Phone number
+
+This data is collected to ensure full legal protection for the developer of Viggo+
+The data is not shared with any third parties other than Discord as discord is being used for the data database.
